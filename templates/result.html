@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Personality Result</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Your Personality Type</h2>
+
+<div class="result">
+{{ personality }}
+</div>
+
+<h3>Personality Scores</h3>
+
+<ul>
+
+{% for key,value in scores.items() %}
+
+<li>{{ key }} : {{ (value*100)|round(2) }}%</li>
+
+{% endfor %}
+
+</ul>
+
+<h3>Suggestion for Improvement</h3>
+
+<p>{{ suggestion }}</p>
+
+<br>
+
+<a href="/">Try Again</a>
+
+</div>
+
+</body>
+
+</html>

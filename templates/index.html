@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>AI Personality Predictor</title>
+<link rel="stylesheet" href="/static/style.css">
+
+<script>
+
+let current = 0;
+
+function showQuestion(index){
+
+    let questions = document.querySelectorAll(".question");
+
+    questions.forEach(q => q.style.display="none");
+
+    questions[index].style.display="block";
+
+    document.getElementById("prevBtn").style.display = index===0 ? "none" : "inline";
+
+    if(index === questions.length-1){
+        document.getElementById("nextBtn").style.display="none";
+        document.getElementById("submitBtn").style.display="inline";
+    }else{
+        document.getElementById("nextBtn").style.display="inline";
+        document.getElementById("submitBtn").style.display="none";
+    }
+
+}
+
+function nextQuestion(){
+    current++;
+    showQuestion(current);
+}
+
+function prevQuestion(){
+    current--;
+    showQuestion(current);
+}
+
+window.onload = function(){
+    showQuestion(0);
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Personality Predictor</h1>
+
+<form action="/predict" method="post">
+
+{% for q in questions %}
+
+<div class="question">
+
+<p>{{ q }}</p>
+
+<textarea name="answers" required></textarea>
+
+</div>
+
+{% endfor %}
+
+<br>
+
+<button type="button" id="prevBtn" onclick="prevQuestion()">Previous</button>
+
+<button type="button" id="nextBtn" onclick="nextQuestion()">Next</button>
+
+<button type="submit" id="submitBtn" style="display:none;">Predict Personality</button>
+
+</form>
+
+</div>
+
+</body>
+
+</html>
